@@ -3,44 +3,40 @@ package com.group.libraryapp.controller.calculator.user;
 import com.group.libraryapp.dto.request.user.UserCreateRequest;
 import com.group.libraryapp.dto.request.user.UserResponse;
 import com.group.libraryapp.dto.request.user.UserUpdateRequest;
-import com.group.libraryapp.service.user.UserService;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import com.group.libraryapp.service.user.UserServiceV1;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController
 public class UserController {
 
 
-    private final UserService userService;
+    private final UserServiceV1 userServiceV1;
 
-    public UserController(UserService userService) {
+    public UserController(UserServiceV1 userServiceV1) {
 //        this.jdbcTemplate = jdbcTemplate;
-        this.userService = userService;
+        this.userServiceV1 = userServiceV1;
     }
 
     @PostMapping("/user")
     public void saveUser(@RequestBody UserCreateRequest request){
-        userService.saveUser(request.getName(), request.getAge());
+        userServiceV1.saveUser(request.getName(), request.getAge());
     }
 
     @GetMapping("/user")
     public List<UserResponse> getUsers(){
-        return userService.getUsers();
+        return userServiceV1.getUsers();
     }
 
     @PutMapping("/user")
     public void updateUser(@RequestBody UserUpdateRequest request){
-        userService.userUpdate(request);
+        userServiceV1.userUpdate(request);
     }
 
     @DeleteMapping("/user")
     public void deleteUser(@RequestParam String name){
-        userService.deleteUser(name);
+        userServiceV1.deleteUser(name);
     }
 
 }

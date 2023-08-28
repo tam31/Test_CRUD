@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
+
 public class User {
 
     @Id
@@ -30,5 +31,13 @@ public class User {
 
     public Integer getAge() {
         return age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void updateName(String name) {
+        this.name = name;
     }
 }
