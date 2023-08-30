@@ -1,7 +1,7 @@
 package com.group.libraryapp.service.user;
 
-import com.group.libraryapp.domain.User;
-import com.group.libraryapp.domain.UserRepository;
+import com.group.libraryapp.domain.user.User;
+import com.group.libraryapp.domain.user.UserRepository;
 import com.group.libraryapp.dto.request.user.UserCreateRequest;
 import com.group.libraryapp.dto.request.user.UserResponse;
 import com.group.libraryapp.dto.request.user.UserUpdateRequest;
