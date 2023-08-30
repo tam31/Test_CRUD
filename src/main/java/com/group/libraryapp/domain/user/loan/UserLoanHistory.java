@@ -25,6 +25,11 @@ public class UserLoanHistory {
         this.isReturn = false;
     }
 
+    public void returnBook(){
+        this.isReturn = true;
+    }
+
+
     public Long getId() {
         return id;
     }

@@ -8,6 +8,7 @@ import com.group.libraryapp.domain.user.loan.UserLoanHistory;
 import com.group.libraryapp.domain.user.loan.UserLoanHistoryRepository;
 import com.group.libraryapp.dto.request.book.BookCreateRequest;
 import com.group.libraryapp.dto.request.book.BookLoanRequest;
+import com.group.libraryapp.dto.request.book.BookReturnReqeust;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,5 +51,15 @@ public class BookService {
         // 대출가능
         // 4.대출테이블 안에 데이터 넣기
         userLoanHistoryRepository.save(new UserLoanHistory(user.getId(),book.getName()));
+    }
+
+    public void returnBook(BookReturnReqeust reqeust){
+        User user = userRepository.findByName(reqeust.getUserName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        UserLoanHistory history = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), reqeust.getBookName())
+                .orElseThrow(IllegalArgumentException::new);
+
+        history.returnBook();
     }
 }
