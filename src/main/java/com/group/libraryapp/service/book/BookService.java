@@ -47,19 +47,25 @@ public class BookService {
         // 3.회원아이디 확인
         User user = userRepository.findByName(reqeust.getUserName())
                 .orElseThrow(IllegalArgumentException::new);
-
-        // 대출가능
-        // 4.대출테이블 안에 데이터 넣기
-        userLoanHistoryRepository.save(new UserLoanHistory(user.getId(),book.getName()));
+        user.loanBook(book.getName());
+        /**
+         * 대출가능
+         * 4.대출테이블 안에 데이터 넣기
+         * userLoanHistoryRepository.save(new UserLoanHistory(user,book.getName()));
+        **/
     }
 
     public void returnBook(BookReturnReqeust reqeust){
         User user = userRepository.findByName(reqeust.getUserName())
                 .orElseThrow(IllegalArgumentException::new);
-
-        UserLoanHistory history = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), reqeust.getBookName())
-                .orElseThrow(IllegalArgumentException::new);
-
-        history.returnBook();
+        user.returnBook(reqeust.getBookName());
+        /**
+         * 연관관계 없이 할 경우
+         * UserLoanHistory history = userLoanHistoryRepository.findByUserIdAndBookName(user.getId(), reqeust.getBookName())
+         *                 .orElseThrow(IllegalArgumentException::new);
+         *
+         *         history.returnBook();
+         */
+        
     }
 }
